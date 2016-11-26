@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo socket.io</title>
+  </head>
+  <body>
+    <h1>Welcome socket.io</h1>
+    <p></p>
+    <input type="text" id="inp">
+    <button id="but">发送</button>
+    <input type="text" id="name">
+    <script src="http://cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      var socket = io.connect('http://localhost:3000');
+      /*socket.on('news',function(data){
+        var $h1=$("<h1></h1>").html(data.hello);
+        $("body").append($h1);
+        socket.emit('other',{my:'data'});
+      });*/
+      /*socket.on('text',function(data){
+        var $h1=$("<h1></h1>").html("从服务端返回的:" + data);
+        $("$h1").append($h1);
+      });*/
+      /*$('#but').click(function(){
+          socket.emit('text',$('#inp').val());
+          $('#inp').val('');
+      })*/
+      $('#but').click(function(){
+          if($("#name").val()){
+            socket.emit('to',{name:$("#name").val(),text:$('#inp').val()});
+          }else{
+            socket.emit('all',$('#inp').val());
+          }
+          $('#inp').val('');
+      })
+    </script>
+  </body>
+</html>

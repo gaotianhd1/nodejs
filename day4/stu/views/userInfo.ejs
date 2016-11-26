@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>学生信息</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>学生信息</h1>
+    <form class="" action="/delete" method="post">
+      输入要删除的学生姓名：<input type="text" name="username" value="">
+      <input type="submit" name="delete" value="删除">
+      <input type="submit" name="over" value="返回">
+    </form>
+    <hr>
+    <div id="info">
+        <% studb.forEach(function(studb){ %>
+            <p><strong>Name:</strong><%= studb.user %></p>
+            <p><strong>Age:</strong><%= studb.age %></p>
+            <p><strong>Email:</strong><%= studb.email %></p>
+            <p><strong>tel:</strong><%= studb.phone %></p>
+            <hr>
+        <% }); %>
+    </div>
+
+  </body>
+</html>

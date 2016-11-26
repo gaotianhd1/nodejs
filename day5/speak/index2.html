@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/socket.io/1.5.1/socket.io.js"></script>
+  <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      font: 13px Helvetica,Arial;
+    }
+    form{
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    form input{
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: 5px;
+    }
+    form button{
+      width: 9%;
+      background: rgb(130,224, 255);
+      border: none;
+      padding: 10px;
+    }
+    #message {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    #message li{
+      padding: 5px 10px;
+    }
+    #message li:nth-child(odd){
+      background: #eee;
+    }
+    #join{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- 加入时广播，并确认 -->
+  <div id="join"></div>
+  <ul id="message">
+
+  </ul>
+  <form action="">
+    <input id="m" autocomplete="off"/><button>send</button>
+  </form>
+  <script type="text/javascript">
+    var socket = io();
+    $('form').submit(function(){
+      var mes = $('#m').val();
+      socket.emit('chat message',mes);
+      $('#m').val('');
+
+      return false;
+    });
+    // socket.on('connect',function(){
+
+    // });
+
+    socket.on('chat message',function(msg){
+      console.log('ok');
+      socket.emit('ferret',msg,function(data){
+        if(data){
+          $('#message').append($('<li>').text(data+"√"));
+        }else{
+          $('#message').append($('<li>').text(data));
+        }
+        console.log(data);
+      });
+    });
+    socket.on('broadcast',function(mag){
+      console.log('broadcast');
+      $('#join').append('<p><strong>Welcome to new friend.</strong></p>')
+    })
+  </script>
+</body>
+</html>

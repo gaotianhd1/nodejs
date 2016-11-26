@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>学生界面</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <h1>welcome to <%= user%></h1>
+    <form class="" action="/infor" method="post">
+      <input style="display:none" type="text" name="username" value=<%= user %>>
+      <input type="submit" name="name" value="个人信息">
+    </form>
+    <a href="/">退出</a>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <style media="screen">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      li{
+        list-style: none;
+      }
+      #yonghuming{
+
+      }
+      #liaotian{
+        width: 100%;
+        height: 300px;
+        overflow: scroll;
+        position: relative;
+      }
+      #liaotianjiemian{
+        display: none;
+      }
+      #yidong{
+        position: absolute;
+      }
+      body{
+        background: #e9e9e9;
+      }
+      #fasong{
+        float: right;
+      }
+      .green{
+        color:green;
+      }
+    </style>
+  </head>
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./jquery.mobile-1.4.5.min.css" media="screen" title="no title">
+  <script src="./jquery-1.11.3.min.js"></script>
+  <script src="./jquery.mobile-1.4.5.min.js"></script>
+  <script src="http://cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      var socket = io.connect();
+      socket.on('connect', function () {
+        var name;
+        var top;
+        $("#ybtn").on("tap",function(){
+          if ($("#yonghuming input").val() == ""){
+            $("#yonghuming span").text("用户名不能为空!");
+          }
+          else{
+            $("#yonghuming").hide();
+            $("#liaotianjiemian").show();
+            name = $("#yonghuming input").val();
+            socket.emit('login',{name:name,data:"欢迎*" + name + "*进入房间!"})
+            $('#mes').append($('<li>欢迎加入!*' + name + '*</li>'));
+          }
+        });
+
+        socket.on('nameList',function(data){
+            $('#nameList').html(data);
+        });
+
+        $("#chakanzaixian").on("tap",function(){
+          socket.emit('chakan','chakan');
+        });
+
+        $("#fasong").on("tap",function(){
+          socket.emit('message',name + ":" + $("#text").val(),function(data){
+            if(data){
+              $('#mes').append($('<li></li>').text(name + ":" + $("#text").val()+" ok"));
+            }else{
+              $('#mes').append($('<li></li>').text(name + ":" + $("#text").val()+" false"));
+            }
+
+            $("#text").val("");
+          });
+
+
+          if ($("#yidong").height() >= $("#liaotian").height()){
+            top = $("#yidong").position().top;
+            $("#yidong").animate({top:(top - 19) + 'px'});
+          }
+        });
+
+        socket.on("to",function(mag){
+          $('#mes').append($('<li></li>').text(mag));
+        })
+
+        $("#to").on("tap",function(){
+          socket.emit('to',{name:$("#towho").val(),data:$("#text").val()});
+          $('#mes').append($('<li></li>').text("to-" + $("#towho").val() + ":" + $("#text").val()));
+          $("#text").val("");
+          if ($("#yidong").height() >= $("#liaotian").height()){
+            top = $("#yidong").position().top;
+            $("#yidong").animate({top:(top - 19) + 'px'});
+          }
+        })
+          socket.on('message', function(message) {
+              $('#mes').append($('<li style="color:red;"></li>').text(message));
+              if ($("#yidong").height() >= $("#liaotian").height()){
+                top = $("#yidong").position().top;
+                $("#yidong").animate({top:(top - 19) + 'px'});
+              }
+          });
+          socket.on('disconnect', function() {
+              $('#mes').append('<li>Disconnected</li>');
+          });
+      });
+  });
+  </script>
+  <body>
+      <div data-role="page" id="yonghuming">
+        请输入用户名:<input type="text">
+          <button type="button" name="login"  id="ybtn">登陆</button>
+        <span><a href="" id="zhuce">新用户注册</a></span>
+      </div>
+      <div data-role="page" id="liaotianjiemian">
+        <div data-role="header" data-position="fixed" style="background:#33a3dc;color:white;"><h1>聊天室</h1></div>
+        <div role="content">
+          <div id="liaotian">
+            <div id="yidong"><ul id="mes"></ul></div>
+          </div>
+        <textarea name="name" rows="6" cols="40" id="text"></textarea>
+        <button id="fasong">全体发送</button><br/>
+        <button id="to">私聊发送</button>私聊(用户名):<input type="text" id="towho"><br/>
+        <button id="chakanzaixian">查看在线</button><br/>
+        <span id="nameList"></span>
+        </div>
+        <div data-role="footer" style="width:100%;height:50px;border-top:1px solid gray;position:absolute;bottom:0;" id='foot'>
+              <div style="font-size:12px;margin-left:50px;margin-top:5px;width:30px;float:left;" id="we"><span class="fa fa-comment-o"
+              style="display:inline-block;font-size:21px;margin-left:2px;margin-bottom:5px;"></span><br/>消息</div>
+              <div style="font-size:12px;margin-left:90px;margin-top:5px;width:40px;float:left;" id="fa"><span class="fa fa-user"
+              style="display:inline-block;font-size:21px;margin-left:9px;margin-bottom:5px;"></span><br/>联系人</div>
+              <div style="font-size:12px;margin-left:90px;margin-top:5px;width:30px;float:left;" class="green" id="to"><span class="fa fa-star-o"
+              style="display:inline-block;font-size:21px;margin-left:3px;margin-bottom:5px;"></span><br/>群聊</div>
+        </div>
+      </div>
+  </body>
+</html>

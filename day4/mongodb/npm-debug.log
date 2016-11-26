@@ -1,0 +1,92 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'i', 'mongodb', '-d' ]
+2 info using npm@3.10.8
+3 info using node@v0.10.25
+4 verbose node symlink /usr/bin/node
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly fetchPackageMetaData mongodb@^2.2.11
+9 silly fetchNamedPackageData mongodb
+10 silly mapToRegistry name mongodb
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry data { raw: 'mongodb',
+13 silly mapToRegistry   scope: null,
+13 silly mapToRegistry   escapedName: 'mongodb',
+13 silly mapToRegistry   name: 'mongodb',
+13 silly mapToRegistry   rawSpec: '',
+13 silly mapToRegistry   spec: 'latest',
+13 silly mapToRegistry   type: 'tag' }
+14 silly mapToRegistry uri https://registry.npmjs.org/mongodb
+15 verbose request uri https://registry.npmjs.org/mongodb
+16 verbose request no auth needed
+17 info attempt registry request try #1 at 14:05:49
+18 verbose request id f2ac24a20a0eec79
+19 verbose etag W/"5825baa2-8ce17"
+20 verbose lastModified Fri, 11 Nov 2016 12:33:38 GMT
+21 http request GET https://registry.npmjs.org/mongodb
+22 http 304 https://registry.npmjs.org/mongodb
+23 verbose headers { date: 'Mon, 21 Nov 2016 06:05:49 GMT',
+23 verbose headers   via: '1.1 varnish',
+23 verbose headers   'cache-control': 'max-age=300',
+23 verbose headers   etag: 'W/"5825baa2-8ce17"',
+23 verbose headers   age: '206',
+23 verbose headers   connection: 'keep-alive',
+23 verbose headers   'x-served-by': 'cache-itm7420-ITM',
+23 verbose headers   'x-cache': 'HIT',
+23 verbose headers   'x-cache-hits': '2',
+23 verbose headers   'x-timer': 'S1479708349.818721,VS0,VE0',
+23 verbose headers   vary: 'Accept-Encoding' }
+24 silly get cb [ 304,
+24 silly get   { date: 'Mon, 21 Nov 2016 06:05:49 GMT',
+24 silly get     via: '1.1 varnish',
+24 silly get     'cache-control': 'max-age=300',
+24 silly get     etag: 'W/"5825baa2-8ce17"',
+24 silly get     age: '206',
+24 silly get     connection: 'keep-alive',
+24 silly get     'x-served-by': 'cache-itm7420-ITM',
+24 silly get     'x-cache': 'HIT',
+24 silly get     'x-cache-hits': '2',
+24 silly get     'x-timer': 'S1479708349.818721,VS0,VE0',
+24 silly get     vary: 'Accept-Encoding' } ]
+25 verbose etag https://registry.npmjs.org/mongodb from cache
+26 verbose get saving mongodb to /home/linux/.npm/registry.npmjs.org/mongodb/.cache.json
+27 verbose correctMkdir /home/linux/.npm correctMkdir not in flight; initializing
+28 silly install normalizeTree
+29 silly loadCurrentTree Finishing
+30 silly loadIdealTree Starting
+31 silly install loadIdealTree
+32 silly cloneCurrentTree Starting
+33 silly install cloneCurrentTreeToIdealTree
+34 silly cloneCurrentTree Finishing
+35 silly loadShrinkwrap Starting
+36 silly install loadShrinkwrap
+37 silly loadShrinkwrap Finishing
+38 silly loadAllDepsIntoIdealTree Starting
+39 silly install loadAllDepsIntoIdealTree
+40 silly rollbackFailedOptional Starting
+41 silly rollbackFailedOptional Finishing
+42 silly runTopLevelLifecycles Finishing
+43 silly install printInstalled
+44 verbose stack Error: Refusing to install mongodb as a dependency of itself
+44 verbose stack     at checkSelf (/usr/local/lib/node_modules/npm/lib/install/validate-args.js:53:14)
+44 verbose stack     at Array.0 (/usr/local/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+44 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+44 verbose stack     at chain (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+44 verbose stack     at /usr/local/lib/node_modules/npm/lib/install/validate-args.js:16:5
+44 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:35
+44 verbose stack     at Array.forEach (native)
+44 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:11
+44 verbose stack     at Array.forEach (native)
+44 verbose stack     at asyncMap (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:51:8)
+45 verbose cwd /home/linux/gaotian1/node/day4/mongodb
+46 error Linux 4.2.0-27-generic
+47 error argv "node" "/usr/local/bin/npm" "i" "mongodb" "-d"
+48 error node v0.10.25
+49 error npm  v3.10.8
+50 error code ENOSELF
+51 error Refusing to install mongodb as a dependency of itself
+52 error If you need help, you may report this error at:
+52 error     <https://github.com/npm/npm/issues>
+53 verbose exit [ 1, true ]

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div><% include ./header %></div>
+    <ul>
+        <% info.forEach(function(info){ %>
+          <li><strong>name:</strong><%= info.name %>---<strong>age:</strong><%= info.age %></li>
+
+        <% }); %>
+    </ul>
+    <div>
+      <% include ./footer %>
+    </div>
+  </body>
+</html>
